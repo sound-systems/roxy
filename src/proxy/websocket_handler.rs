@@ -3,7 +3,8 @@ use std::{net::SocketAddr, pin::Pin};
 use anyhow::{anyhow, Context, Error};
 use fastwebsockets::{
     handshake,
-    upgrade::{upgrade, UpgradeFut}, WebSocketError,
+    upgrade::{upgrade, UpgradeFut},
+    WebSocketError,
 };
 
 use http_body_util::Empty;
@@ -85,8 +86,8 @@ async fn handle_connection(client_ws: UpgradeFut, addr: SocketAddr) -> Result<()
     };
 
     tokio::select! {
-        _ = client_to_upstream => println!("Client connection closed"),
-        _ = upstream_to_client => println!("Upstream connection closed: {}", addr),
+        _ = client_to_upstream => println!("client connection closed"),
+        _ = upstream_to_client => println!("upstream connection closed: {}", addr),
     }
 
     Ok(())
