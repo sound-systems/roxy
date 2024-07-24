@@ -1,6 +1,6 @@
 use std::{net::SocketAddr, pin::Pin};
 
-use anyhow::{Context, Error};
+use anyhow::{anyhow, Context, Error};
 use fastwebsockets::{
     handshake,
     upgrade::{upgrade, UpgradeFut},
@@ -98,6 +98,12 @@ pub struct WebSocketHandler {
     registry: Registry,
 }
 
+impl WebSocketHandler {
+    pub fn new(registry: Registry) -> Self {
+        Self { registry }
+    }
+}
+
 impl Service<Request<Incoming>> for WebSocketHandler {
     type Response = Response<Empty<Bytes>>;
     type Error = Error;
@@ -112,7 +118,7 @@ impl Service<Request<Incoming>> for WebSocketHandler {
                         Ok(uri) => handle_connection(ws, uri)
                             .await
                             .context("websocket proxy connection broke"),
-                        Err(e) => Err(e).context("failed to determine upstream uri"),
+                        Err(e) => Err(anyhow!("failed to determine upstream uri: {e}")),
                     } {
                         eprint!("something went wrong: {e}")
                     }

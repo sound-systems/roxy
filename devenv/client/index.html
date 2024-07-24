@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+
+<body>
+    <h1>WebSocket Client</h1>
+    <label for="server">Choose a server:</label>
+    <select id="server">
+        <option value="ws://localhost:9090">Roxy</option>
+        <option value="ws://localhost:8081">Server 1</option>
+        <option value="ws://localhost:8082">Server 2</option>
+        <option value="ws://localhost:8083">Server 3</option>
+    </select>
+    <button onclick="connect()">Connect</button>
+    <button onclick="sendPing()">Send Ping</button>
+    <div id="messages"></div>
+
+    <script>
+        let socket;
+        const messagesDiv = document.getElementById('messages');
+
+        function connect() {
+            const server = document.getElementById('server').value;
+            socket = new WebSocket(server);
+
+            socket.onopen = () => {
+                addMessage(`Connected to ${server}`);
+            };
+
+            socket.onmessage = (event) => {
+                addMessage(`Received: ${event.data}`);
+            };
+
+            socket.onclose = () => {
+                addMessage(`Disconnected from ${server}`);
+            };
+
+            socket.onerror = (error) => {
+                addMessage(`Error: ${error.message}`);
+            };
+        }
+
+        function sendPing() {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send('ping');
+                addMessage('Sent: ping');
+            } else {
+                addMessage('Socket is not open');
+            }
+        }
+
+        function addMessage(message) {
+            const p = document.createElement('p');
+            p.textContent = message;
+            messagesDiv.appendChild(p);
+        }
+    </script>
+</body>
+
+</html>

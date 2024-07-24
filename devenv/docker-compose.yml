@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  echo-server1:
+    image: node:16
+    container_name: echo_server1
+    volumes:
+      - ./server:/usr/src/app
+    working_dir: /usr/src/app
+    command: node server.js
+    ports:
+      - "8081:8080"
+    environment:
+      - PORT=8080
+      - SERVER_NAME=echo_server1
+
+  echo-server2:
+    image: node:16
+    container_name: echo_server2
+    volumes:
+      - ./server:/usr/src/app
+    working_dir: /usr/src/app
+    command: node server.js
+    ports:
+      - "8082:8080"
+    environment:
+      - PORT=8080
+      - SERVER_NAME=echo_server2
+
+  echo-server3:
+    image: node:16
+    container_name: echo_server3
+    volumes:
+      - ./server:/usr/src/app
+    working_dir: /usr/src/app
+    command: node server.js
+    ports:
+      - "8083:8080"
+    environment:
+      - PORT=8080
+      - SERVER_NAME=echo_server3
+
+  web-client:
+    image: nginx:alpine
+    container_name: web_client
+    volumes:
+      - ./client:/usr/share/nginx/html:ro
+    ports:
+      - "8080:80"

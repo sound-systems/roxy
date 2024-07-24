@@ -12,20 +12,19 @@ use hyper::{
 use hyper_util::rt::TokioIo;
 use tokio::net::TcpListener;
 
-use super::{connection, websocket_handler::WebSocketHandler};
+use super::websocket_handler::WebSocketHandler;
 
 pub struct Server {
-    addr: SocketAddr,
     handler: WebSocketHandler,
 }
 
 impl Server {
-    pub fn new(addr: SocketAddr, handler: WebSocketHandler) -> Self {
-        Self { addr, handler }
+    pub fn new(handler: WebSocketHandler) -> Self {
+        Self { handler }
     }
 
-    pub async fn listen(self) -> Result<(), Error> {
-        let listener = TcpListener::bind(self.addr)
+    pub async fn listen(self, addr: SocketAddr) -> Result<(), Error> {
+        let listener = TcpListener::bind(addr)
             .await
             .context("failed to setup proxy tcp listener")?;
 

@@ -17,5 +17,7 @@ Cargo.lock
 .vscode
 
 # Added by cargo
-
 /target
+
+# Ignore supporting devenv dependencies
+node_modules
