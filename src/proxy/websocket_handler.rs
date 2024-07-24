@@ -3,8 +3,7 @@ use std::{net::SocketAddr, pin::Pin};
 use anyhow::{anyhow, Context, Error};
 use fastwebsockets::{
     handshake,
-    upgrade::{upgrade, UpgradeFut},
-    OpCode, Role, WebSocket, WebSocketError,
+    upgrade::{upgrade, UpgradeFut}, WebSocketError,
 };
 
 use http_body_util::Empty;

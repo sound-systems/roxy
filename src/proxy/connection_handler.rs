@@ -5,11 +5,8 @@ use fastwebsockets::WebSocketError;
 use http_body_util::Empty;
 use hyper::body::Bytes;
 use hyper::body::Incoming;
-use hyper::server::conn::http1;
-use hyper::service::service_fn;
 use hyper::Request;
 use hyper::Response;
-use tokio::net::TcpListener;
 
 async fn handle_client(fut: upgrade::UpgradeFut) -> Result<(), WebSocketError> {
     let ws = fut.await?;

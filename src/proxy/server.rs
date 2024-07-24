@@ -1,13 +1,8 @@
 use std::net::SocketAddr;
 
 use anyhow::{Context, Error};
-use fastwebsockets::{upgrade::upgrade, WebSocketError};
-use http_body_util::Empty;
 use hyper::{
-    body::{Bytes, Incoming},
     server::conn::http1,
-    service::service_fn,
-    Request, Response,
 };
 use hyper_util::rt::TokioIo;
 use tokio::net::TcpListener;

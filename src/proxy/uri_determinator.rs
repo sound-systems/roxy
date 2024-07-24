@@ -22,6 +22,6 @@ impl Registry {
             .addresses
             .get(index)
             .context("random load balancer accessed invalid index")?;
-        SocketAddr::from_str(&addr).context("the registry has resolved to an invalid uri")
+        SocketAddr::from_str(addr).context("the registry has resolved to an invalid uri")
     }
 }

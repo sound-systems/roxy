@@ -13,18 +13,12 @@ pub struct Arguments {
 }
 
 #[derive(Serialize, Deserialize)]
+#[derive(Default)]
 pub struct Settings {
     #[serde(default)]
     pub web: WebServer,
 }
 
-impl Default for Settings {
-    fn default() -> Self {
-        Self {
-            web: Default::default(),
-        }
-    }
-}
 
 impl TryFrom<Option<PathBuf>> for Settings {
     type Error = anyhow::Error;
