@@ -5,7 +5,13 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.86"
+async-trait = "0.1.81"
 clap = { version = "4.5.10", features = ["derive"] }
+fastwebsockets = { version = "0.8.0", features = ["upgrade", "unstable-split"] }
+futures-util = { version = "0.3.30", features = ["sink"] }
+http-body-util = "0.1.2"
+hyper = { version = "1.4.1", features = ["full"] }
+hyper-util = { version = "0.1.6", features = ["full"] }
 serde = { version = "1.0.204", features = ["derive"] }
 serde_toml = "0.0.1"
 tokio = { version = "1.39.1", features = ["full"] }
