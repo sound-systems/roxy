@@ -6,6 +6,7 @@
 
 mod server;
 mod uri_determinator;
+mod uri_utils;
 mod websocket_handler;
 
 pub use server::Server;

@@ -112,7 +112,7 @@ impl Service<Request<Incoming>> for WebSocketHandler {
             Ok((res, ws)) => {
                 let registry = self.registry.clone();
                 tokio::spawn(async move {
-                    if let Err(e) = match registry.determine_address().await {
+                    if let Err(e) = match registry.determine_address(req.uri()).await {
                         Ok(uri) => handle_connection(ws, uri)
                             .await
                             .context("websocket proxy connection broke"),

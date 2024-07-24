@@ -1,6 +1,7 @@
 use std::{net::SocketAddr, str::FromStr};
 
 use anyhow::{Context, Error};
+use hyper::Uri;
 use rand::Rng;
 
 #[derive(Debug, Clone)]
@@ -15,7 +16,7 @@ impl Registry {
         }
     }
 
-    pub async fn determine_address(&self) -> Result<SocketAddr, Error> {
+    pub async fn determine_address(&self, uri: &Uri) -> Result<SocketAddr, Error> {
         let mut rng = rand::thread_rng();
         let index = rng.gen_range(0..self.addresses.len());
         let addr = self
