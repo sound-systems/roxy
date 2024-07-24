@@ -1,9 +1,7 @@
 use std::net::SocketAddr;
 
 use anyhow::{Context, Error};
-use hyper::{
-    server::conn::http1,
-};
+use hyper::server::conn::http1;
 use hyper_util::rt::TokioIo;
 use tokio::net::TcpListener;
 
