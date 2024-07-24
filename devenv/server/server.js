@@ -11,13 +11,13 @@ const wss = new WebSocket.Server({ port }, () => {
 wss.on('connection', ws => {
     ws.on('message', message => {
         if (message === 'ping') {
-            ws.send('pong');
+            ws.send(`pong from ${serverName}`);
         }
     });
 
     const sendAddress = setInterval(() => {
         ws.send(`Server: ${serverName} listening on port ${port}`);
-    }, 5000);
+    }, 2000);
 
     ws.on('close', () => {
         clearInterval(sendAddress);
