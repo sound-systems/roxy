@@ -42,8 +42,6 @@ async fn handle_connection(client_ws: UpgradeFut, addr: SocketAddr) -> Result<()
 
     let req = Request::builder()
         .method("GET")
-        .uri("http://localhost:9001/")
-        .header("Host", "localhost:9001")
         .header(UPGRADE, "websocket")
         .header(CONNECTION, "upgrade")
         .header("Sec-WebSocket-Key", handshake::generate_key())

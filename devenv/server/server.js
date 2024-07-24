@@ -10,9 +10,9 @@ const wss = new WebSocket.Server({ port }, () => {
 
 wss.on('connection', ws => {
     ws.on('message', message => {
-        if (message === 'ping') {
-            ws.send(`pong from ${serverName}`);
-        }
+        // if (message === 'ping') {
+        ws.send(`pong from ${serverName}`);
+        // }
     });
 
     const sendAddress = setInterval(() => {
