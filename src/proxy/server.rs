@@ -1,19 +1,13 @@
-//! # proxy
-//!
-//! the proxy module contains the utilities to
-//! bootstrap a websocket proxy
-//!
-
 use std::net::SocketAddr;
 
 use anyhow::{Context, Error};
 use tokio::net::TcpListener;
 
-pub struct Proxy {
+pub struct Server {
     addr: SocketAddr,
 }
 
-impl Proxy {
+impl Server {
     pub fn new(addr: SocketAddr) -> Self {
         Self { addr }
     }
